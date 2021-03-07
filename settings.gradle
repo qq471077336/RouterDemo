@@ -1,0 +1,7 @@
+include ':module2'
+include ':module1'
+include ':router_api'
+include ':router-compiler'
+include ':router-annotations'
+include ':app'
+rootProject.name = "RouterDemo"

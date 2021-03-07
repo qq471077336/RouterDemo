@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = rootProject.ext.androidID.java_version
+    targetCompatibility = rootProject.ext.androidID.java_version
+}
+

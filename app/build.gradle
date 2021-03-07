@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+}
+
+def androidID = rootProject.ext.androidID
+
+android {
+    compileSdkVersion androidID.compileSdkVersion
+    buildToolsVersion androidID.buildToolsVersion
+
+    defaultConfig {
+        applicationId appID.app
+        minSdkVersion androidID.minSdkVersion
+        targetSdkVersion androidID.targetSdkVersion
+        versionCode androidID.versionCode
+        versionName androidID.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("boolean", "isRelease", String.valueOf(isRelease))
+
+        //传递参数
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName : project.getName(), packageNameForAPT : packageNameForAPT]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "debug", "\"${url.debug}\"")
+        }
+        release {
+            buildConfigField("String", "release", "\"${url.release}\"")
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility androidID.java_version
+        targetCompatibility androidID.java_version
+    }
+}
+
+dependencies {
+    implementation project(path: ':module1')
+    implementation project(path: ':module2')
+
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.2.1'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    dependenciesID.each {k, v -> implementation v}
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(path: ':router-annotations')
+    annotationProcessor project(":router-compiler")
+}

@@ -1,0 +1,31 @@
+ext {
+    isRelease = true
+
+    packageNameForAPT = "com.lwd.routerdemo";
+
+    url = [
+            "release" : "",
+            "debug" : "",
+    ]
+
+    androidID = [
+            compileSdkVersion : 28,
+            buildToolsVersion : "30.0.2",
+            applicationId : "com.lwd.routerdemo",
+            minSdkVersion : 22,
+            targetSdkVersion : 28,
+            versionCode : 1,
+            versionName : "1.0",
+            java_version : JavaVersion.VERSION_1_8
+    ]
+
+    appID = [
+            app : "com.lwd.routerdemo",
+    ]
+
+    dependenciesID = [
+            "appcompat" : 'androidx.appcompat:appcompat:1.2.0',
+            "material" : 'com.google.android.material:material:1.2.1',
+            "constraintlayout" : 'androidx.constraintlayout:constraintlayout:2.0.4',
+    ]
+}
